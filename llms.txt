@@ -1,0 +1,17 @@
+# Martin Štěpánek
+
+> Articles by Martin Štěpánek (CTO at Maxfusion AI · Full Stack Web Developer). Each article below links to its plain-markdown copy; the web page is the same URL without index.html.md.
+
+Martin Štěpánek is on X as @st3pan3k (https://x.com/st3pan3k) and on LinkedIn (https://www.linkedin.com/in/martin-st3pan3k). New articles go out on X and LinkedIn first.
+
+## Articles
+
+- [Onboard your agent like a new developer. How we wrote our CLAUDE.md](https://martinstepanek.github.io/onboard-your-agent-like-a-new-developer/index.html.md): Don't copy someone else's CLAUDE.md. It was written for their codebase and their team. Your codebase looks different and your team works differently, so your agent has to work differently too.
+- [Make the wrong code impossible. How we set up our codebase for agents](https://martinstepanek.github.io/make-the-wrong-code-impossible/index.html.md): Your agent copies your codebase. Give him a mess, and he will write more mess. Give him a clear pattern, and he will follow it.
+- [Start small, then let go. How to learn to trust AI agents](https://martinstepanek.github.io/start-small-then-let-go/index.html.md): The code does not have to be perfect. It never was.
+- [AI writes 100% of our code. Here is what happened.](https://martinstepanek.github.io/ai-writes-100-percent-of-our-code/index.html.md): I joined Maxfusion AI as CTO in May 2026. Now AI writes all of our code without exception. We ship features that take others weeks or even months in days, while drastically lowering technical debt, cutting down on errors and making the platform more stable than ever.
+
+## Optional
+
+- [All articles in one file](https://martinstepanek.github.io/llms-full.txt): every article's full text, newest first
+- [RSS feed](https://martinstepanek.github.io/feed.xml)

@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Onboard your agent like a new developer. How we wrote our CLAUDE.md</title>
+    <link rel="preload" href="/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/schibsted-grotesk-latin-ext-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <style>@font-face{font-family: "Schibsted Grotesk";src: url("/fonts/schibsted-grotesk-latin-wght-normal.woff2") format("woff2");font-weight: 400 900;font-display: swap;unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}@font-face{font-family: "Schibsted Grotesk";src: url("/fonts/schibsted-grotesk-latin-ext-wght-normal.woff2") format("woff2");font-weight: 400 900;font-display: swap;unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}@font-face{font-family: "Schibsted Grotesk Fallback";src: local("Arial"), local("Liberation Sans"), local("Helvetica");size-adjust: 105.07%;ascent-override: 92.94%;descent-override: 24.54%;line-gap-override: 0%}:root{--bg: #000000;--panel: #0d0d0c;--surface: #161615;--text: #f0efe9;--muted: #b3b1a8;--faint: #7d7b74;--line: #222221;--line-strong: #3a3a37;--accent: #3987e5;--link: #6ba6ee;--sans: "Schibsted Grotesk", "Schibsted Grotesk Fallback", sans-serif;--mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;--gutter: clamp(20px, 5vw, 40px);--wide: min(1040px, calc(100vw - 2 * var(--gutter)));--measure: min(680px, calc(100vw - 2 * var(--gutter)));--figure: min(880px, calc(100vw - 2 * var(--gutter)))}*{box-sizing: border-box}html{background: var(--bg);color: var(--text);font-family: var(--sans);-webkit-text-size-adjust: 100%;text-rendering: optimizeLegibility;-webkit-font-smoothing: antialiased}body{margin: 0;line-height: 1.5;overflow-x: clip}::selection{background: var(--accent);color: #fff}:focus-visible{outline: 2px solid var(--accent);outline-offset: 3px;border-radius: 3px}main:focus{outline: none}.nav-wait{cursor: progress}.nav-wait body::before{content: "";position: fixed;z-index: 20;top: 0;left: 0;width: 100%;height: 2px;background: var(--accent);transform-origin: left;animation: nav-wait 2s cubic-bezier(0.1, 0.6, 0.3, 1) 150ms both}@keyframes nav-wait{from{transform: scaleX(0)}to{transform: scaleX(0.9)}}.prose[aria-busy="true"]{min-height: 100vh}.vh{position: absolute;width: 1px;height: 1px;margin: -1px;padding: 0;overflow: hidden;clip-path: inset(50%);white-space: nowrap;border: 0}.skip{position: absolute;left: 12px;top: 12px;z-index: 10;padding: 10px 16px;border-radius: 8px;background: var(--text);color: #000;font-weight: 600;text-decoration: none;transform: translateY(-200%)}.skip:focus{transform: none}a{color: inherit}h1, h2, h3, p{margin: 0}img{display: block;max-width: 100%;height: auto}.site-header{width: var(--wide);margin: 0 auto;padding: 28px 0;display: flex;justify-content: space-between;align-items: center;gap: 16px}.avatar{display: block;flex: none;width: 56px;height: 56px;border-radius: 50%;object-fit: cover;background: var(--surface)}.masthead{display: flex;align-items: center;gap: 14px}.brand{display: inline-flex;align-items: center;gap: 10px}.brand .avatar{width: 38px;height: 38px}.brand{font-size: 16px;font-weight: 700;letter-spacing: -0.01em;text-decoration: none}.site-nav{display: flex;gap: 4px;margin-right: -10px}.icon-link{display: grid;place-items: center;width: 40px;height: 40px;color: var(--muted);transition: color 0.15s}.icon-link:hover{color: var(--text)}.icon-link svg{width: 19px;height: 19px}.icon-link .x-logo{width: 18px;height: 18px}.site-footer .icon-link svg{width: 17px;height: 17px}main{padding-bottom: 96px}.site-footer{width: var(--wide);margin: 0 auto;padding: 28px 0 48px;border-top: 1px solid var(--line);display: flex;flex-wrap: wrap;justify-content: space-between;gap: 8px 24px;color: var(--faint);font-size: 14px}.site-footer{align-items: center}.site-footer .brand{color: var(--muted);font-size: 15px;font-weight: 600;text-decoration: none}.site-footer .brand:hover{color: var(--text)}.kicker{margin-bottom: 14px;color: var(--accent);font-size: 13px;font-weight: 650;letter-spacing: 0.1em;text-transform: uppercase}.meta{color: var(--faint);font-size: 15px}.lede{color: var(--muted);font-size: 17px;line-height: 1.55}.post-title{text-wrap: balance;font-weight: 700;letter-spacing: -0.025em;line-height: 1.12}.post-title a{text-decoration: none}:is(.featured, .row, .grid > li):has(a:hover) .post-title a{text-decoration: underline;text-decoration-color: var(--accent);text-decoration-thickness: 2px;text-underline-offset: 5px}.post-title .sub, h1 .sub{color: var(--muted);font-weight: 400}.rows .post-title .sub, .grid .post-title .sub{display: block;margin-top: 0.12em}.cover{display: block;overflow: hidden;border: 1px solid var(--line);border-radius: 10px;background: var(--panel)}.masthead h1{font-size: 22px;font-weight: 750;line-height: 1.2;letter-spacing: -0.02em}.masthead p{margin-top: 2px;color: var(--faint);font-size: 15px}.not-found{width: var(--measure);margin: 96px auto}.not-found h1{font-size: 40px;letter-spacing: -0.03em}.not-found p{margin-top: 12px;color: var(--muted);font-size: 18px}.not-found a{color: var(--link)}.featured{width: var(--wide);margin: 64px auto 0;display: grid;grid-template-columns: minmax(0, 1fr) clamp(280px, 38vw, 420px);gap: clamp(28px, 5vw, 56px);align-items: center}.featured-text{container-type: inline-size}.featured .post-title{text-wrap: balance}.featured .post-title{font-size: clamp(30px, 9.4cqi, 56px);font-weight: 750;line-height: 1.03;letter-spacing: -0.04em}.featured .post-title .sub{display: block;margin-top: 0.22em;font-size: 0.62em;line-height: 1.15;letter-spacing: -0.025em}.featured .lede{margin-top: 26px;max-width: 34em;font-size: 18px;color: #dddcd4}.featured .meta{margin-top: 18px}.rows{width: var(--wide);margin: 120px auto 0;padding: 0;list-style: none}.row{display: grid;grid-template-columns: clamp(220px, 30vw, 320px) minmax(0, 1fr);gap: clamp(24px, 4vw, 40px);align-items: center}.row + .row{margin-top: 64px}.row .post-title{font-size: 27px}.row .lede{margin-top: 14px;max-width: 34em;font-size: 16px}.row .post-title{max-width: 22em}.row .meta{margin-top: 14px}.post-head{width: var(--wide);margin: 64px auto 0;padding: 0 0 64px calc((var(--wide) - var(--measure)) / 2)}.post-head h1{text-wrap: balance;font-size: clamp(36px, 5.2vw, 60px);font-weight: 720;line-height: 1.06;letter-spacing: -0.028em}.post-head h1 .sub{display: block;margin-top: 0.45em;font-size: 0.58em;line-height: 1.2;letter-spacing: -0.012em}.post-head .meta{margin-top: 36px}.prose{width: var(--measure);margin: 0 auto;font-size: 19px;line-height: 1.62;color: #dddcd4}.prose p, .prose li, .lede{text-wrap: pretty}.prose p, .prose ul, .prose blockquote{margin: 0 0 1.5em}.prose h2{margin: 2.3em 0 0.6em;font-family: var(--sans);font-size: 30px;font-weight: 700;line-height: 1.15;letter-spacing: -0.025em;color: var(--text)}.prose h3{margin: 1.8em 0 0.45em;font-family: var(--sans);font-size: 21px;font-weight: 700;line-height: 1.25;letter-spacing: -0.015em;color: var(--text)}.prose h2 + h3{margin-top: 0.8em}.prose a{color: var(--text);text-decoration: underline;text-decoration-color: var(--accent);text-decoration-thickness: 1.5px;text-underline-offset: 0.32em;text-decoration-skip-ink: auto}.prose a:hover{color: var(--link)}.prose ul{padding-left: 1.2em}.prose li{margin-bottom: 0.4em}.prose blockquote{padding-left: 22px;border-left: 2px solid var(--accent);color: var(--text)}.prose code{font-family: var(--mono);font-size: 0.85em;background: var(--surface);padding: 2px 6px;border-radius: 4px}.prose figure{position: relative;left: 50%;width: var(--figure);margin: 2.2em 0;transform: translateX(-50%);overflow: hidden;border: 1px solid var(--line);border-radius: 10px;background: var(--surface)}.prose figure img{width: 100%}.prose figure:not(.chart){width: var(--measure)}.prose figure:not(.chart) img{opacity: 0.92}.prose figcaption{padding: 12px 16px;background: var(--bg);color: var(--muted);font-family: var(--sans);font-size: 15px;line-height: 1.45}.prose figcaption a{text-underline-offset: 3px}.discuss{width: var(--measure);margin: 72px auto 0}.discuss h2{margin-bottom: 14px;color: var(--muted);font-size: 15px;font-weight: 600}.discuss-cards{display: grid;grid-template-columns: 1fr 1fr;gap: 12px}.discuss-card{display: flex;align-items: center;gap: 14px;padding: 16px 18px;border: 1px solid var(--line-strong);border-radius: 12px;background: var(--panel);color: var(--text);text-decoration: none}.discuss-card:hover{border-color: var(--muted)}.discuss-card svg{flex: none;width: 22px;height: 22px;color: var(--text)}.discuss-card strong{display: block;font-size: 16px;font-weight: 650}.discuss-card small{display: block;margin-top: 2px;color: var(--faint);font-size: 14px}.follow{width: var(--measure);margin: 40px auto 0;padding: 28px;display: grid;grid-template-columns: auto minmax(0, 1fr);gap: 20px;border: 1px solid var(--line-strong);border-radius: 14px;background: var(--panel)}.follow .follow-photo{width: 64px;height: 64px}.follow-name{font-size: 20px;font-weight: 700;letter-spacing: -0.015em}.follow-text{margin-top: 4px;color: var(--muted);font-size: 17px;line-height: 1.45;text-wrap: pretty}.follow-actions{display: flex;flex-wrap: wrap;gap: 10px;margin-top: 20px}.btn{display: inline-flex;align-items: center;justify-content: center;gap: 9px;min-height: 46px;padding: 0 20px;border-radius: 999px;font-size: 16px;font-weight: 650;text-decoration: none;white-space: nowrap}.btn-x{background: var(--text);color: #000}.btn-x:hover{background: #fff}.btn-x .x-logo{width: 17px;height: 17px}.btn-ghost{border: 1px solid var(--line-strong);color: var(--text)}.btn-ghost:hover{border-color: var(--muted)}@media (min-width: 1340px){:root{--figure: 760px}body:has(.post){--wide: min(calc(var(--measure) + 2 * (56px + 320px)), calc(100vw - 2 * var(--gutter)))}.post{display: grid;grid-template-columns: minmax(0, 1fr) var(--measure) minmax(0, 1fr);column-gap: 56px;width: var(--wide);margin-left: auto;margin-right: auto}.post > *{grid-column: 2;width: auto;margin-left: 0;margin-right: 0}.post > .post-head{padding-left: 0}.post > .follow{grid-column: 3;grid-row: 2 / span 3;align-self: start;position: sticky;top: 32px;width: min(320px, 100%);margin: 0;padding: 26px;grid-template-columns: 1fr;gap: 0}.follow .follow-photo{width: 56px;height: 56px;margin-bottom: 14px}.post > .follow .follow-name{font-size: 20px}.post > .follow .follow-text{margin-top: 6px;font-size: 16px}.post > .follow .follow-actions{flex-direction: column;margin-top: 18px;gap: 8px}.post > .follow .btn{min-height: 44px;padding: 0 16px;font-size: 15px}}.next{width: var(--measure);margin: 56px auto 0;font-size: 24px;font-weight: 700;letter-spacing: -0.02em;line-height: 1.2;text-wrap: balance}.next > span{display: block;margin-bottom: 8px;color: var(--accent);font-size: 13px;font-weight: 650;letter-spacing: 0.1em;text-transform: uppercase}.next a{display: block;text-decoration: none}.next a:hover{text-decoration: underline;text-decoration-color: var(--accent);text-decoration-thickness: 2px;text-underline-offset: 5px}.next .sub{display: block;color: var(--muted);font-weight: 400}.more{width: var(--wide);margin: 128px auto 0}.more > h2{margin-bottom: 32px;font-size: 15px;font-weight: 600;color: var(--muted)}.grid{display: grid;grid-template-columns: repeat(3, minmax(0, 1fr));gap: 48px 32px;margin: 0;padding: 0;list-style: none}.grid .cover{margin-bottom: 20px}.grid .kicker{margin-bottom: 8px;font-size: 12px}.grid .post-title{font-size: 20px;line-height: 1.18}.grid .meta{margin-top: 10px;font-size: 14px}@media (max-width: 960px){:root{--wide: var(--measure)}.featured{margin-top: 40px;grid-template-columns: 1fr;gap: 28px}.featured .cover{order: -1;padding: 0 14%}.featured .lede{font-size: 17px}.rows{margin-top: 88px}.row{grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);gap: 28px;align-items: start}.row + .row{margin-top: 56px}.row .post-title{font-size: 23px}.row .lede{font-size: 15px}.more{margin-top: 96px}.grid{grid-template-columns: 1fr;gap: 48px}.grid > li{display: grid;grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);grid-template-rows: auto auto 1fr;column-gap: 28px}.grid > li > .cover{grid-row: 1 / -1;align-self: start;margin-bottom: 0}.grid > li > :not(.cover){grid-column: 2}}@media (max-width: 560px){.site-header{padding: 20px 0}.site-header:has(.masthead){display: grid;grid-template-columns: auto minmax(0, 1fr) auto;column-gap: 10px;row-gap: 10px;align-items: center}.masthead, .masthead > div{display: contents}.masthead .avatar{grid-column: 1;grid-row: 1;width: 42px;height: 42px}.masthead h1{grid-column: 2;grid-row: 1;font-size: 17px;white-space: nowrap}.site-header:has(.masthead) .site-nav{grid-column: 3;grid-row: 1}.masthead p{grid-column: 1 / -1;grid-row: 2;margin: 0;font-size: 14px}.featured{margin-top: 24px;gap: 22px}.featured .kicker{margin-bottom: 10px;font-size: 12px}.featured .lede{margin-top: 18px;font-size: 16px}.rows, .grid{border-top: 1px solid var(--line)}.rows{margin-top: 64px}.row, .grid > li{grid-template-columns: 112px minmax(0, 1fr);column-gap: 16px;padding: 22px 0;border-bottom: 1px solid var(--line)}.row + .row{margin-top: 0}.row:last-child, .grid > li:last-child{border-bottom: 0}.grid{gap: 0}.featured .cover{padding: 0}.row .cover, .grid .cover{border-radius: 8px}.row .kicker, .grid .kicker{margin-bottom: 6px;font-size: 11px}.row .post-title, .grid .post-title{font-size: 18px;line-height: 1.2}.row .lede{display: none}.row .meta, .grid .meta{margin-top: 8px;font-size: 13px}.post-head{margin-top: 28px;padding-bottom: 36px}.post-head .meta{margin-top: 24px}.prose{font-size: 17.5px;line-height: 1.6}.prose h2{font-size: 25px}.prose h3{font-size: 19px}.next{margin-top: 44px;font-size: 21px}.follow{padding: 22px 20px;grid-template-columns: auto minmax(0, 1fr);column-gap: 14px;row-gap: 0;align-items: center}.follow-body{display: contents}.follow .follow-photo{width: 52px;height: 52px}.follow-name{grid-column: 2}.follow-text, .follow-actions{grid-column: 1 / -1}.follow-text{margin-top: 14px}.follow-actions{flex-direction: column}.discuss{margin-top: 56px}.discuss-cards{grid-template-columns: 1fr}.more{margin-top: 72px}.more h2{margin-bottom: 0}}@media (max-width: 380px){.masthead h1{font-size: 16px}.site-nav{gap: 2px}}figure.chart.live{padding: 22px 26px 16px;overflow: visible;line-height: 1.3}figure.chart.live .chart-title{margin: 0;font-family: var(--sans);font-size: 17px;font-weight: 600;letter-spacing: -0.01em;color: var(--text)}figure.chart.live .titlerow{display: flex;justify-content: space-between;align-items: baseline;flex-wrap: wrap;gap: 8px 24px;margin-bottom: 16px}figure.chart.live .legend{font-family: var(--sans);display: flex;flex-wrap: wrap;gap: 6px 18px;font-size: 13px;color: var(--muted)}figure.chart.live .legend span{display: inline-flex;align-items: center;gap: 7px}figure.chart.live .sw{width: 11px;height: 11px;border-radius: 3px;display: inline-block}figure.chart.live .hero{display: grid;grid-template-columns: 220px minmax(0, 1fr);gap: 10px 26px;align-items: start}figure.chart.live .tile{padding-top: 6px}figure.chart.live .tile p{margin: 0;font-family: var(--sans)}figure.chart.live .tile .lbl{margin-bottom: 8px;font-size: 13.5px;line-height: 1.35;color: var(--muted)}figure.chart.live .tile .val{white-space: nowrap;font-weight: 600;line-height: 1;letter-spacing: -0.02em;color: var(--text)}figure.chart.live .tile .val .arr{display: inline-block;position: relative;top: -0.2em;font-size: 0.72em;margin: 0 0.22em}figure.chart.live .plot{min-width: 0}figure.chart.live svg{display: block;width: 100%;height: auto;overflow: visible;font-family: var(--sans)}figure.chart.live svg text{font-family: inherit}figure.chart.live svg .tick{font-variant-numeric: tabular-nums}figure.chart.live .hit{cursor: default;outline: none}figure.chart.live .hit:focus-visible{stroke: var(--accent);stroke-width: 1.5;rx: 4}figure.chart.live .col:hover path, figure.chart.live .col:focus-within path{filter: brightness(1.18)}figure.chart.live .pt:hover circle, figure.chart.live .pt:focus-within circle{r: 6}#tip{font-family: var(--sans);position: fixed;z-index: 9;display: none;max-width: 260px;padding: 8px 10px;border-radius: 6px;background: #0b0b0b;color: #f5f5f5;font-size: 13px;line-height: 1.4;border: 1px solid #2a2a2a;box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);pointer-events: none}#tip b{color: #fff}@media (max-width: 720px){figure.chart.live .hero{grid-template-columns: 1fr;gap: 6px}figure.chart.live .tile .val{font-size: 40px !important}figure.chart.live{padding: 16px 14px 10px}}@media (min-width: 721px){figure.chart.live .hero{align-items: end}figure.chart.live .tile{padding: 0 0 34px}}@media (prefers-reduced-motion: no-preference){@view-transition{navigation: auto}.site-header .avatar{view-transition-name: avatar}.masthead h1, .brand > span{view-transition-name: site-name}.site-header .site-nav{view-transition-name: site-nav}.post-title, .post-head h1, .next a{view-transition-class: title}::view-transition-group(*){animation-duration: 320ms;animation-timing-function: cubic-bezier(0.2, 0, 0, 1)}::view-transition-old(root){animation: 160ms ease-in both vt-out}::view-transition-new(root){animation: 320ms cubic-bezier(0.2, 0, 0, 1) 60ms both vt-in}.masthead h1{width: fit-content}::view-transition-old(*.title), ::view-transition-new(*.title){width: auto;height: auto}::view-transition-old(*.title){animation-duration: 140ms}}@keyframes vt-out{to{opacity: 0}}@keyframes vt-in{from{opacity: 0;transform: translateY(12px)}}</style>
+    <link rel="expect" href="#site-end" blocking="render" />
+    <script>function vtTarget(path, here) {
+  if (path === here) return document.querySelector('.post-head h1');
+  var a = document.querySelector('.post-title a[href="' + path + '"], .next a[href="' + path + '"]');
+  return a && (a.closest('.post-title') || a);
+}
+function vtVisible(el) { var r = el.getBoundingClientRect(); return r.height > 0 && r.bottom > 0 && r.top < innerHeight; }
+function vtEntity(from, to, back) { var p = back || to === '/' ? from : to; return p === '/' || from === to ? null : p; }
+function vtCross(e, from, to, back) {
+  var p = e.viewTransition && vtEntity(from, to, back), el = p && vtTarget(p, location.pathname);
+  if (!el || !vtVisible(el)) return;
+  el.style.viewTransitionName = 'title';
+  e.viewTransition.finished.finally(function () { el.style.viewTransitionName = ''; });
+}
+function vtBack(a) { return a.navigationType === 'traverse' && a.from && a.entry.index < a.from.index; }
+addEventListener('pageswap', function (e) {
+  var a = e.activation;
+  if (a && a.entry) vtCross(e, location.pathname, new URL(a.entry.url).pathname, vtBack(a));
+});
+addEventListener('pagereveal', function (e) {
+  var a = window.navigation && navigation.activation;
+  if (a && a.from && /push|traverse/.test(a.navigationType)) vtCross(e, new URL(a.from.url).pathname, location.pathname, vtBack(a));
+});</script>
+    <meta name="description" content="Don&#x27;t copy someone else&#x27;s CLAUDE.md. It was written for their codebase and their team. Your codebase looks different and your team works differently, so your agent has to work differently too." />
+    <link rel="canonical" href="https://martinstepanek.github.io/onboard-your-agent-like-a-new-developer/" />
+    <meta name="author" content="Martin Štěpánek" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#000000" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Martin Štěpánek" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Onboard your agent like a new developer. How we wrote our CLAUDE.md" />
+    <meta property="og:description" content="Don&#x27;t copy someone else&#x27;s CLAUDE.md. It was written for their codebase and their team. Your codebase looks different and your team works differently, so your agent has to work differently too." />
+    <meta property="og:url" content="https://martinstepanek.github.io/onboard-your-agent-like-a-new-developer/" />
+    <meta property="og:image" content="https://martinstepanek.github.io/og/onboard-your-agent-like-a-new-developer.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Cover: Onboard your agent like a new developer. How we wrote our CLAUDE.md" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@st3pan3k" />
+    <meta name="twitter:creator" content="@st3pan3k" />
+    <meta name="twitter:title" content="Onboard your agent like a new developer. How we wrote our CLAUDE.md" />
+    <meta name="twitter:description" content="Don&#x27;t copy someone else&#x27;s CLAUDE.md. It was written for their codebase and their team. Your codebase looks different and your team works differently, so your agent has to work differently too." />
+    <meta name="twitter:image" content="https://martinstepanek.github.io/og/onboard-your-agent-like-a-new-developer.png" />
+    <meta name="twitter:image:alt" content="Cover: Onboard your agent like a new developer. How we wrote our CLAUDE.md" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="Martin Štěpánek" href="/feed.xml" />
+    <meta property="article:published_time" content="2026-11-18" />
+    <meta property="article:modified_time" content="2026-11-18" />
+    <meta property="article:author" content="https://martinstepanek.github.io/" />
+    <link rel="alternate" type="text/markdown" title="Markdown" href="/onboard-your-agent-like-a-new-developer/index.html.md" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "@id": "https://martinstepanek.github.io/onboard-your-agent-like-a-new-developer/#article", "mainEntityOfPage": "https://martinstepanek.github.io/onboard-your-agent-like-a-new-developer/", "url": "https://martinstepanek.github.io/onboard-your-agent-like-a-new-developer/", "headline": "Onboard your agent like a new developer. How we wrote our CLAUDE.md", "description": "Don't copy someone else's CLAUDE.md. It was written for their codebase and their team. Your codebase looks different and your team works differently, so your agent has to work differently too.", "datePublished": "2026-11-18", "dateModified": "2026-11-18", "inLanguage": "en", "wordCount": 1459, "image": {"@type": "ImageObject", "url": "https://martinstepanek.github.io/og/onboard-your-agent-like-a-new-developer.png", "width": 1200, "height": 630}, "author": {"@type": "Person", "@id": "https://martinstepanek.github.io/#person", "name": "Martin Štěpánek", "url": "https://martinstepanek.github.io/", "description": "CTO at Maxfusion AI · Full Stack Web Developer", "image": "https://martinstepanek.github.io/avatar-192.webp", "sameAs": ["https://www.linkedin.com/in/martin-st3pan3k", "https://x.com/st3pan3k"]}, "publisher": {"@id": "https://martinstepanek.github.io/#person"}, "isPartOf": [{"@id": "https://martinstepanek.github.io/#website"}, {"@type": "CreativeWorkSeries", "name": "Building with agents"}], "discussionUrl": "https://x.com/st3pan3k/status/2123076372260118597", "sameAs": ["https://www.linkedin.com/pulse/onboard-your-agent-like-new-developer-how-we-wrote-our-%C5%A1t%C4%9Bp%C3%A1nek-sy6gf", "https://x.com/st3pan3k/status/2123076372260118597"], "position": 3}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Martin Štěpánek", "item": "https://martinstepanek.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Onboard your agent like a new developer. How we wrote our CLAUDE.md", "item": "https://martinstepanek.github.io/onboard-your-agent-like-a-new-developer/"}]}</script>
+    <script>
+      (function () {
+        var m = /[?&]me=(on|off)/.exec(location.search);
+        if (!m) return;
+        try { m[1] === 'off' ? localStorage.setItem('ph-me', '1') : localStorage.removeItem('ph-me'); } catch (e) {}
+        history.replaceState(history.state, '', location.pathname + location.hash);
+      })();
+      var phOff = false;
+      try { phOff = localStorage.getItem('ph-me') === '1'; } catch (e) {}
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="gu mu yu bu ku init Qu Zu Wu Vu Yu el Gu ec zu lc uc cc hc dc vc capture getExtension Ju fu mc calculateEventProperties gc register register_once register_for_session unregister unregister_for_session wc Uu yc getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys onActiveMatchingSurveysChanged renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync kc identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset Sc shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty bc rc createPersonProfile setInternalOrTestUser Cu xu opt_in_capturing opt_out_capturing $u has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing nc debug il Os getPageViewId captureTraceFeedback captureTraceMetric Nu".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      function phInit() {
+        if (phOff) return;
+        posthog.init('phc_A3N7YnGkanSHYx3pCyqPZPNN4pQVZDSdEBJjkg7wyc6U', {
+          api_host: 'https://eu.i.posthog.com',
+          defaults: '2026-05-30',
+          persistence: 'memory',
+          person_profiles: 'identified_only',
+          disable_surveys: true,
+        });
+      }
+      function phLater() {
+        if (document.readyState !== 'complete') return addEventListener('load', phLater, { once: true });
+        (window.requestIdleCallback || setTimeout)(phInit);
+      }
+      if (document.prerendering) document.addEventListener('prerenderingchange', phLater, { once: true }); else phLater();
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href]');
+        if (!a) return;
+        var net = /(^|\.)x\.com$/.test(a.hostname) ? 'x' : /(^|\.)linkedin\.com$/.test(a.hostname) ? 'linkedin' : a.pathname === '/feed.xml' ? 'rss' : null;
+        if (!net) return;
+        var where = a.closest('.follow') ? 'follow' : a.closest('.discuss') ? 'discuss' : a.closest('.site-header') ? 'header' : a.closest('.site-footer') ? 'footer' : 'text';
+        posthog.capture('social_click', { network: net, placement: where, follow_intent: a.href.indexOf('/intent/follow') > -1, link: a.href });
+      }, true);
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="/"><img class="avatar" src="/avatar-96.webp" srcset="/avatar-96.webp 1x, /avatar-192.webp 2x" width="56" height="56" alt="" /><span>Martin Štěpánek</span></a>
+      <nav class="site-nav" aria-label="Profiles">
+        <a class="icon-link" href="https://www.linkedin.com/in/martin-st3pan3k" target="_blank" rel="me noopener" title="LinkedIn"><svg class="li-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span class="vh">LinkedIn (opens in a new tab)</span></a>
+        <a class="icon-link" href="https://x.com/st3pan3k" target="_blank" rel="me noopener" title="X (@st3pan3k)"><svg class="x-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span class="vh">X (@st3pan3k) (opens in a new tab)</span></a>
+      </nav>
+    </header>
+    <main id="main">
+<article class="post">
+  <header class="post-head">
+    <p class="kicker">Building with agents · Part 3</p>
+    <h1>Onboard your agent like a new developer. <span class="sub">How we wrote our CLAUDE.md</span></h1>
+    <p class="meta"><time datetime="2026-11-18">18 November 2026</time>, 6 min read</p>
+  </header>
+  <div class="prose">
+<p>Don't copy someone else's CLAUDE.md. It was written for their codebase and their team. Your codebase looks different and your team works differently, so your agent has to work differently too.</p>
+<p>In my previous article, <a href="/make-the-wrong-code-impossible/">Make the wrong code impossible. How we set up our codebase for agents</a>, I wrote about where to fix the things your agent keeps doing wrong. First in the codebase, then with deterministic checks like CI, and only after that in prose: CLAUDE.md or skills. This article is about the prose.</p>
+<p>Think of the agent as a new developer on your team. At the start he doesn't understand anything about how you work. He needs to be onboarded, so he understands your intent and behaves the way the rest of the team expects. That is what CLAUDE.md is for: aligning the agent with you and your team. And with an agent, every session is his first day.</p>
+<p>I won't give you a template. I will show you what is in ours and why, so you can think about what should be in yours. And also what should never be there.</p>
+<h2 id="what-should-not-be-there">What should not be there</h2>
+<p>First, never use Claude Code's /init command, which creates a CLAUDE.md for you. By design, /init is wrong, because it creates it from the codebase. That means it writes down everything the agent is already able to read by himself. But CLAUDE.md should contain only the things he is not able to read or infer from the codebase. So I highly recommend writing it by hand and not letting AI write it.</p>
+<p>For the same reason, it should never contain a description of the codebase. No documentation or path explanations (a lot of people write something like "src/ - code, docs/ - documentation", explaining what is where). This kind of documentation becomes obsolete very quickly, so it might even cause harm. And if the agent can't find his way around the code, fix the code.</p>
+<p>And it should not contain anything that can be checked deterministically by a script. For example, we use React Compiler, so there is no need for manual useMemo or useCallback. That rule had been in our CLAUDE.md since April, but the agent kept adding them anyway. So we added a linter rule that fails on every new one, and removed the line from CLAUDE.md. Now the agent can't get it wrong.</p>
+<h2 id="your-values">Your values</h2>
+<p>Write down what you value. These are decisions you made as a team, and the agent can't see them in the code.</p>
+<p>For example, we don't really care about backward compatibility, since most of our traffic comes from MCP and not from the API. And the agents using our MCP have no problem with breaking changes. They just pick up the newest tools. But agents tend to write special shims so they don't introduce a breaking change, even when it's not worth it. That makes the code way more complex.</p>
+<p>What we value is simplicity. The simpler the code is, the easier it is to read, update and remove. And the fewer errors it has. So our CLAUDE.md says that on our public API and MCP, simplicity beats backward compatibility. Delete the old behavior instead of keeping shims and dual code paths for it.</p>
+<p>The second one: we value deploys that don't interrupt work. We deploy often, so our services restart often. For the user, a restart has to be a non-event. A generation that was running has to finish after the restart. It can't fail, hang or charge the user twice. So every feature has to be designed with that in mind.</p>
+<p>To find your values, look at the PRs where the agent made a decision you would have made differently. Usually there is a reason why you would do it differently, and that reason is what you write down.</p>
+<h2 id="your-language">Your language</h2>
+<p>Every product has its own language, and it can't always be understood from the codebase.</p>
+<p>We have surfaces: places where our users can use our features. Studio, flows, our public API, MCP and our in-app agent. We use these words in our specs and prompts all the time, like "ship it on every surface". So our CLAUDE.md has a short definition of each one, together with a rule: every new feature ships on all surfaces, and they all share one core, so it behaves the same everywhere.</p>
+<p>A lot of engineers now embrace domain-driven design (DDD) even more than in the past, since it gives the agent a clear separation and a common vocabulary to communicate with. DDD has its own downsides, so we are still looking into it and haven't applied it yet.</p>
+<p>Write down the words from your specs, issues and prompts that the agent can't learn from the code.</p>
+<h2 id="behavior">Behavior</h2>
+<p>Tell the agent how to behave: how to work with you, how to approach things, when to be autonomous and when to stop for your input. These are some examples we have in our CLAUDE.md.</p>
+<h3 id="which-model-does-what">Which model does what</h3>
+<p>We use different models for different work, and our CLAUDE.md says which one is for what. At the time of writing this article, Opus 5.5 is the default for almost everything: implementation, plans, specs and investigations. We use Fable 5.2 only when we ask for it.</p>
+<p>Every piece of work gets two independent reviews before it's handed over: one from a fresh Opus 5.5 that did not write it, and one from GPT Sol 6.1. We don't trust Sol to ship code as much as Opus. But Sol is incredible at reviews, since it's very diligent. It also helps as a second thinker on hard problems, because it brings its own view.</p>
+<p>In the first article of this series, <a href="/start-small-then-let-go/">Start small, then let go. How to learn to trust AI agents</a>, I recommended telling the agent to use a different model to review his PR. With this in your CLAUDE.md, you don't have to tell him every time.</p>
+<h3 id="investigations-and-questions-are-read-only">Investigations and questions are read-only</h3>
+<p>Models tend to jump to implementation, even when you don't want them to. You just ask why something is broken, and the agent is already fixing it.</p>
+<p>That's why the most useful lines in our CLAUDE.md are probably these: investigations are strictly read-only. The agent reads the data and reports what he found, but he changes nothing unless we tell him to.</p>
+<p>What he can look at, like errors, logs, metrics and a copy of our production database, is listed in a separate investigate skill.</p>
+<h2 id="keep-it-up-to-date">Keep it up to date</h2>
+<p>Your CLAUDE.md is not something you write once.</p>
+<p>Update it at least with every new frontier model. Different models behave differently. They have their own quirks, strengths and weaknesses. Our model section has changed with every release since July. Back then, the models were so different that we had a table with a score for every model's cost, intelligence and taste. Now Opus 5.5 is extremely good at almost everything and GPT models are great for reviews, so a few simple lines are enough.</p>
+<p>It also needs to be checked against your previous conversations and updated based on them. Every time you have to step in and correct the agent, there is a reason for it. You don't have to look for it by hand. Just ask the agent: "go through my last sessions, find every time I had to correct you, and tell me why".</p>
+<p>If something keeps coming back, it's a candidate for CLAUDE.md. But first try to fix it in the code or with a check, as I wrote in the previous article. Only if that's not possible does it go into CLAUDE.md. The agent reads the whole file in every session, and every line competes for his attention with all the others, so try to keep it short and simple.</p>
+<h2 id="write-your-own">Write your own</h2>
+<p>So when you are writing yours, ask yourself three questions. What do you value when you build your software? Which words are specific to your product and don't clearly map to your code? And when did the agent behave in a way you didn't want, and how would you like him to behave instead?</p>
+<p>Next article: scaling. What happens when you run tens of agents at once, and why the bottleneck moves from writing code to everything around it.</p>
+<p>What is the best line you ever put in your CLAUDE.md?</p>
+  </div>
+  <section class="discuss" aria-labelledby="discuss-h">
+    <h2 id="discuss-h">Discuss this article</h2>
+    <div class="discuss-cards">
+      <a class="discuss-card" href="https://x.com/st3pan3k/status/2123076372260118597" target="_blank" rel="noopener"><svg class="x-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span><strong>Reply on X</strong><small>The thread under the post</small></span><span class="vh"> (opens in a new tab)</span></a>
+      <a class="discuss-card" href="https://www.linkedin.com/pulse/onboard-your-agent-like-new-developer-how-we-wrote-our-%C5%A1t%C4%9Bp%C3%A1nek-sy6gf" target="_blank" rel="noopener"><svg class="li-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span><strong>Comment on LinkedIn</strong><small>Under the LinkedIn Article</small></span><span class="vh"> (opens in a new tab)</span></a>
+    </div>
+  </section>
+  <aside class="follow" aria-label="Follow Martin">
+    <img class="avatar follow-photo" src="/avatar-96.webp" srcset="/avatar-96.webp 1x, /avatar-192.webp 2x" width="56" height="56" alt="" />
+    <div class="follow-body">
+      <p class="follow-name">Martin Štěpánek</p>
+      <p class="follow-text">New articles go out on X and LinkedIn first. Follow to get the next one.</p>
+      <p class="follow-actions">
+        <a class="btn btn-x" href="https://x.com/intent/follow?screen_name=st3pan3k" target="_blank" rel="noopener"><svg class="x-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Follow @st3pan3k<span class="vh"> (opens in a new tab)</span></a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/martin-st3pan3k" target="_blank" rel="noopener">Follow on LinkedIn<span class="vh"> (opens in a new tab)</span></a>
+      </p>
+    </div>
+  </aside>
+</article>
+<section class="more wide">
+  <h2>More writing</h2>
+<ul class="grid">
+  <li>
+    <a class="cover" href="/make-the-wrong-code-impossible/" tabindex="-1" aria-hidden="true"><img src="/covers/make-the-wrong-code-impossible-800.webp" srcset="/covers/make-the-wrong-code-impossible-400.webp 400w, /covers/make-the-wrong-code-impossible-800.webp 800w, /covers/make-the-wrong-code-impossible-1600.webp 1600w" sizes="(max-width: 560px) 112px, (max-width: 960px) 40vw, 340px" width="1600" height="1000" alt="" loading="lazy" decoding="async" /></a>
+    <p class="kicker">Building with agents · Part 2</p>
+    <h3 class="post-title"><a href="/make-the-wrong-code-impossible/">Make the wrong code impossible. <span class="sub">How we set up our codebase for agents</span></a></h3>
+    <p class="meta"><time datetime="2026-11-10">10 November 2026</time>, 7 min read</p>
+  </li>
+  <li>
+    <a class="cover" href="/start-small-then-let-go/" tabindex="-1" aria-hidden="true"><img src="/covers/start-small-then-let-go-800.webp" srcset="/covers/start-small-then-let-go-400.webp 400w, /covers/start-small-then-let-go-800.webp 800w, /covers/start-small-then-let-go-1600.webp 1600w" sizes="(max-width: 560px) 112px, (max-width: 960px) 40vw, 340px" width="1600" height="1000" alt="" loading="lazy" decoding="async" /></a>
+    <p class="kicker">Building with agents · Part 1</p>
+    <h3 class="post-title"><a href="/start-small-then-let-go/">Start small, then let go. <span class="sub">How to learn to trust AI agents</span></a></h3>
+    <p class="meta"><time datetime="2026-11-06">6 November 2026</time>, 6 min read</p>
+  </li>
+  <li>
+    <a class="cover" href="/ai-writes-100-percent-of-our-code/" tabindex="-1" aria-hidden="true"><img src="/covers/ai-writes-100-percent-of-our-code-800.webp" srcset="/covers/ai-writes-100-percent-of-our-code-400.webp 400w, /covers/ai-writes-100-percent-of-our-code-800.webp 800w, /covers/ai-writes-100-percent-of-our-code-1600.webp 1600w" sizes="(max-width: 560px) 112px, (max-width: 960px) 40vw, 340px" width="1600" height="1000" alt="" loading="lazy" decoding="async" /></a>
+    
+    <h3 class="post-title"><a href="/ai-writes-100-percent-of-our-code/">AI writes 100% of our code. <span class="sub">Here is what happened.</span></a></h3>
+    <p class="meta"><time datetime="2026-10-13">13 October 2026</time>, 5 min read</p>
+  </li>
+</ul>
+</section>
+    </main>
+    <footer class="site-footer" id="site-end">
+      <a class="brand" href="/">Martin Štěpánek</a>
+      <nav class="site-nav" aria-label="Profiles and feed">
+        <a class="icon-link" href="https://www.linkedin.com/in/martin-st3pan3k" target="_blank" rel="me noopener" title="LinkedIn"><svg class="li-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span class="vh">LinkedIn (opens in a new tab)</span></a>
+        <a class="icon-link" href="https://x.com/st3pan3k" target="_blank" rel="me noopener" title="X (@st3pan3k)"><svg class="x-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span class="vh">X (@st3pan3k) (opens in a new tab)</span></a>
+        <a class="icon-link" href="/feed.xml" target="_blank" rel="noopener" title="RSS feed"><svg class="rss-logo" viewBox="0 0 24 24" aria-hidden="true"><circle fill="currentColor" cx="6.18" cy="17.82" r="2.18"/><path fill="currentColor" d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg><span class="vh">RSS feed (opens in a new tab)</span></a>
+      </nav>
+    </footer>
+    <script>/* Moving between the site's pages without full page loads, so every click answers at once (Martin, 19 November 2026).
+
+   - The pages linked from the current one are fetched quietly once it has loaded (and again on hover or touch),
+     so most clicks swap the page instantly.
+   - The swap is a view transition: the header stays, the title of the article being opened glides into the
+     headline (going back, the article being left glides back into its card), the rest cross-fades.
+   - When an article is not fetched yet, it opens at once with what its link already shows (series label, title,
+     date) and the text follows when it arrives.
+   - Back and forward work the same way and return to where the reader was.
+   - Anything else (other sites, new tabs, files, a failed fetch) is a normal page load.
+   vtTarget, vtVisible and vtEntity come from the script in the page head (build.py, TRANSITION_JS).
+   build.py inlines this file at the end of every page. */
+(function () {
+  'use strict';
+  if (!window.fetch || !window.DOMParser || !history.pushState || !window.vtTarget) return;
+
+  var cache = {};
+  var conn = navigator.connection || {};
+  var light = conn.saveData || /2g/.test(conn.effectiveType || '');
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  var idx = history.state && typeof history.state.i === 'number' ? history.state.i : 0;
+  var current = location.pathname;
+  var seq = 0;
+  var root = document.documentElement;
+
+  history.scrollRestoration = 'manual';
+  history.replaceState({ i: idx, scroll: scrollY }, '');
+
+  // a link to one of the site's pages (the index or an article), opened in this tab
+  function pagePath(a) {
+    if (!a || !a.href || a.target || a.hasAttribute('download') || a.origin !== location.origin) return null;
+    var p = a.pathname;
+    return p === '/' || /^\/[a-z0-9-]+\/$/.test(p) ? p : null;
+  }
+
+  function load(path) {
+    if (!cache[path]) {
+      cache[path] = fetch(path, { credentials: 'same-origin' })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+        .then(function (t) { return new DOMParser().parseFromString(t, 'text/html'); })
+        .catch(function () { delete cache[path]; return null; });
+    }
+    return cache[path];
+  }
+
+  function prefetchAll() {
+    if (light) return;
+    load(current);  // for coming back here
+    document.querySelectorAll('a[href]').forEach(function (a) { var p = pagePath(a); if (p) load(p); });
+  }
+  function idle(f) { (window.requestIdleCallback || setTimeout)(f); }
+
+  var scrollTimer = 0;
+  function saveScroll() { history.replaceState({ i: idx, scroll: scrollY }, ''); }
+  addEventListener('scroll', function () { clearTimeout(scrollTimer); scrollTimer = setTimeout(saveScroll, 150); }, { passive: true });
+
+  // put the fetched page's header and content in place of the current ones (the footer is the same everywhere)
+  function swapIn(doc) {
+    document.title = doc.title;
+    document.querySelector('.site-header').replaceWith(document.importNode(doc.querySelector('.site-header'), true));
+    document.querySelector('main').replaceWith(document.importNode(doc.querySelector('main'), true));
+    ['meta[name="description"]', 'link[rel="canonical"]'].forEach(function (s) {
+      var a = document.head.querySelector(s), b = doc.head && doc.head.querySelector(s);
+      if (a && b) a.replaceWith(document.importNode(b, true));
+    });
+    if (document.querySelector('figure.chart[data-chart]')) {
+      if (window.mountCharts) window.mountCharts();
+      else if (!document.querySelector('script[src="/charts.js"]')) {
+        var s = document.createElement('script');
+        s.src = '/charts.js';
+        document.body.appendChild(s);
+      }
+    }
+  }
+
+  function focusMain() {
+    var m = document.querySelector('main');
+    m.setAttribute('tabindex', '-1');
+    m.focus({ preventScroll: true });  // screen readers start reading the new page
+  }
+
+  // an article page made from its link while the real page is on its way: same header, series label, title, date
+  function skeleton(link) {
+    var box = link.closest('li, .featured');
+    var doc = document.implementation.createHTMLDocument(link.textContent.replace(/\s+/g, ' ').trim());
+    var header = document.querySelector('.site-header').cloneNode(true);
+    var mast = header.querySelector('.masthead');
+    if (mast) {  // the index has the big masthead; articles have the small name link
+      var brand = doc.createElement('a');
+      brand.className = 'brand';
+      brand.href = '/';
+      brand.appendChild(mast.querySelector('.avatar').cloneNode(true));
+      var name = doc.createElement('span');
+      name.textContent = mast.querySelector('h1').textContent;
+      brand.appendChild(name);
+      mast.replaceWith(brand);
+    }
+    var kicker = box && box.querySelector('.kicker'), meta = box && box.querySelector('.meta');
+    var main = doc.createElement('main');
+    main.id = 'main';
+    main.innerHTML = '<article class="post"><header class="post-head">' + (kicker ? kicker.outerHTML : '') +
+      '<h1>' + link.innerHTML + '</h1>' + (meta ? meta.outerHTML : '') + '</header><div class="prose" aria-busy="true"></div></article>';
+    doc.body.append(header, main);
+    doc.isSkeleton = true;
+    return doc;
+  }
+
+  // show a page, with the title morph when the moving article is on screen before and after
+  function show(doc, from, to, entity, scroll) {
+    var old = entity && vtTarget(entity, from);
+    if (old && !vtVisible(old)) old = null;
+    var named = null;
+    function update() {
+      swapIn(doc);
+      if (!doc.isSkeleton) root.classList.remove('nav-wait');  // the bar stays until the text is in
+      scrollTo(0, scroll || 0);
+      if (old) {
+        named = vtTarget(entity, to);
+        if (named && vtVisible(named)) named.style.viewTransitionName = 'title'; else named = null;
+      }
+      focusMain();
+    }
+    if (!document.startViewTransition || reduced.matches) { update(); return Promise.resolve(); }
+    if (old) old.style.viewTransitionName = 'title';
+    var vt = document.startViewTransition(update);
+    return vt.finished.catch(function () {}).then(function () {
+      if (old) old.style.viewTransitionName = '';
+      if (named) named.style.viewTransitionName = '';
+    });
+  }
+
+  function navigate(path, opts) {
+    var my = ++seq, from = current;
+    current = path;
+    root.classList.add('nav-wait');  // a thin bar at the top, only if the swap takes longer than a moment (style.css)
+    if (opts.push) {
+      saveScroll();
+      idx += 1;
+      history.pushState({ i: idx, scroll: 0 }, '', path);
+    }
+    var entity = vtEntity(from, path, opts.back);
+    var pending = load(path);
+    var fail = function () { if (my === seq) location.replace(path); };
+    var late = new Promise(function (r) { setTimeout(r, 60, 'late'); });
+    Promise.race([pending, late]).then(function (doc) {
+      if (my !== seq) return;
+      if (doc === 'late' && opts.link && path !== '/') {
+        // not here yet: open the article now from what its link shows, then fill in the rest
+        var shown = show(skeleton(opts.link), from, path, path, 0);
+        Promise.all([pending, shown]).then(function (r) {
+          if (my !== seq) return;
+          if (!r[0]) return fail();
+          swapIn(r[0]);
+          root.classList.remove('nav-wait');
+          idle(prefetchAll);
+        });
+        return;
+      }
+      pending.then(function (d) {
+        if (my !== seq) return;
+        if (!d) return fail();
+        show(d, from, path, entity, opts.scroll).then(function () { idle(prefetchAll); });
+      });
+    });
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest && e.target.closest('a');
+    var path = pagePath(a);
+    if (!path) return;
+    if (a.hash && path === location.pathname) return;  // a jump within the page
+    e.preventDefault();
+    clearTimeout(scrollTimer);
+    if (path === location.pathname) { scrollTo({ top: 0, behavior: reduced.matches ? 'auto' : 'smooth' }); return; }
+    // the cover picture links to the same article as the title next to it
+    var title = a.closest('.post-title') ? a : a.classList.contains('cover') ? a.parentElement.querySelector('.post-title a') : null;
+    navigate(path, { push: true, link: title });
+  });
+
+  addEventListener('popstate', function (e) {
+    if (location.pathname === current) return;  // only the #part of the address changed
+    clearTimeout(scrollTimer);  // the page being left must not write its scroll into this entry
+    var st = e.state || {};
+    var i = typeof st.i === 'number' ? st.i : 0;
+    var back = i < idx;
+    idx = i;
+    navigate(location.pathname, { back: back, scroll: st.scroll || 0 });
+  });
+
+  // fetch a page as soon as the reader points at its link, in case the background fetch has not got there yet
+  ['pointerover', 'touchstart', 'focusin'].forEach(function (type) {
+    document.addEventListener(type, function (e) {
+      var p = pagePath(e.target.closest && e.target.closest('a'));
+      if (p && p !== location.pathname) load(p);
+    }, { passive: true });
+  });
+
+  if (document.readyState === 'complete') idle(prefetchAll);
+  else addEventListener('load', function () { idle(prefetchAll); });
+})();
+</script>
+  </body>
+</html>
