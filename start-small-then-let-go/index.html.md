@@ -16,7 +16,7 @@ One assumption for both: you work on feature branches and merge them into a prot
 
 ### Model selection
 
-At the time of writing, I would recommend most people get an Anthropic subscription and use Opus 5.5 on high effort for most tasks. For simple tasks you can use lower effort, and of course it's OK to use GPT models as well. This is just my general recommendation. Opus 5.5 is an almost Fable-level model, while being way cheaper and more economical with your subscription usage. Why I think Fable is so good is in [my post about which models changed how I work](https://www.linkedin.com/feed/update/urn:li:activity:7524076989373247488/).
+At the time of writing, I would recommend most people get an Anthropic subscription and use Opus 5.5 on high effort for most tasks. For simple tasks you can use lower effort, and of course it's OK to use GPT models as well. This is just my general recommendation. Opus 5.5 is an almost Fable-level model, while being way cheaper and more economical with your subscription usage. Why I think Fable is so good is in [my post about which models changed how I work](https://x.com/st3pan3k/status/2118311481955463507).
 
 ### Aligning intent
 
@@ -42,7 +42,7 @@ At the start, just review the changes and commit them yourself. The moment you a
 
 You are not useful when you are watching AI work. You want to get to the point where you kick off the agent, let him work and don't hear from him until he is done. And when he is done, you just check the PR and merge it. Ideally, you maximize the chance that you actually want to merge the PR. That the PR is right. And while he is working, you are free to do other things, for example kick off another task in parallel.
 
-In 40 days I [shipped 1,200 PRs](https://www.linkedin.com/feed/update/urn:li:activity:7520075876655427584/) and had to intervene in only 11.5% of them (steer the agent or cancel the PR). I would not be able to do that if I was watching the threads.
+In 40 days I [shipped 1,200 PRs](https://x.com/st3pan3k/status/2114308289152291051) and had to intervene in only 11.5% of them (steer the agent or cancel the PR). I would not be able to do that if I was watching the threads.
 
 Don't forget that PRs and code are cheap. If you don't like one, you can always tell the agent to rebuild it or throw it away.
 
@@ -64,7 +64,7 @@ Want to be sure the agent tested it right? Tell him to include screenshots or ev
 
 And this is probably the hardest part. The code does not have to be perfect. It never was. Just because the agent does not write code the way you do does not mean it's not worth merging. Maybe he writes more verbose code than the average human. Why care?
 
-Code always has to fulfill two requirements. It has to do what's expected of it, and it has to be readable. The moment you look at the code and realize you don't understand it the way you want to, fine, refactor it. But until then, you don't have to care about every line break, constant or method name. I wrote more about this in June: [Code quality just does not matter that much anymore](https://www.linkedin.com/feed/update/urn:li:activity:7475840395428519936/).
+Code always has to fulfill two requirements. It has to do what's expected of it, and it has to be readable. The moment you look at the code and realize you don't understand it the way you want to, fine, refactor it. But until then, you don't have to care about every line break, constant or method name. I wrote more about this in June: [Code quality just does not matter that much anymore](https://x.com/st3pan3k/status/2112939707881390560).
 
 ## Next: the codebase
 

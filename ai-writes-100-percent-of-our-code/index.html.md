@@ -6,13 +6,13 @@ I joined Maxfusion AI as CTO in May 2026. Now AI writes all of our code without 
 
 ## 8x the code with 2 developers
 
-In September alone we launched [Research Lab](https://www.linkedin.com/posts/today-we-are-launching-research-lab-search-ugcPost-7510680109138350080-fY5B/), [Radar](https://www.linkedin.com/posts/today-were-launching-radar-spy-on-your-ugcPost-7513194991951986689-gpQC/) and a full redesign of the platform's UI. On top of that 5 new tools, support for 7 new models, Brain with brand kits and an Asana integration, all of it on the web app, the flow canvas, the public API and MCP at once. Two engineers, one month. And it was not the first month like that.
+In September alone we launched [Research Lab](https://x.com/MaxfusionAI/status/2104904524393811982), [Radar](https://x.com/MaxfusionAI/status/2107422093914820804) and a full redesign of the platform's UI. On top of that 5 new tools, support for 7 new models, Brain with brand kits and an Asana integration, all of it on the web app, the flow canvas, the public API and MCP at once. Two engineers, one month. And it was not the first month like that.
 
 On 2 July I posted that we built a [public REST API with 40+ endpoints from a product specification to a production release in 4 days](https://www.linkedin.com/posts/martin-st3pan3k_my-team-was-able-to-develop-a-public-rest-share-7478409359287439360-0xrs/). Most of it was done by one person in the first 2 days. The last 2 days were bug fixing and polishing. Authentication, two-layer rate limits, idempotency, async job delivery, interactive docs, an admin panel for API keys. Not vibe coded, peer reviewed, production ready. That API has 150 endpoints today.
 
-The MCP server is generated from that API, so every endpoint we add becomes a tool an agent in Claude or ChatGPT can use. From spec to merged server took 5 working days. 90% of that went into frictionless interaction: tool interfaces, descriptions, MCP widgets. The code was the easy part. A week later we announced [MCP with 47 tools](https://www.linkedin.com/posts/martin-st3pan3k_mcp-with-47-tools-90-of-the-development-ugcPost-7480231925736022017-18ca/).
+The MCP server is generated from that API, so every endpoint we add becomes a tool an agent in Claude or ChatGPT can use. From spec to merged server took 5 working days. 90% of that went into frictionless interaction: tool interfaces, descriptions, MCP widgets. The code was the easy part. A week later we announced [MCP with 47 tools](https://x.com/MaxfusionAI/status/2074463444452192321).
 
-In August we fully [rebuilt our queue](https://www.linkedin.com/posts/introducing-zero-queue-time-is-money-waiting-ugcPost-7505176007776108544-s-Hy/) from the ground up in just 3 days. 99.8% of all generations now start in under 0.1 s, an edge over competitors where you have to either wait or pay extra for priority generations.
+In August we fully [rebuilt our queue](https://x.com/MaxfusionAI/status/2099453118480056388) from the ground up in just 3 days. 99.8% of all generations now start in under 0.1 s, an edge over competitors where you have to either wait or pay extra for priority generations.
 
 ![Code lines changed per month, October 2025 to September 2026, with developer headcount](https://martinstepanek.github.io/images/ai-writes-100-percent-of-our-code/01-lines-monthly-1760.webp)
 
@@ -48,7 +48,7 @@ Bugs in new code went the same way. 7.1 per 10,000 lines of code changed in July
 
 ## 5x less technical debt
 
-"Fast code is technical debt you pay later." We pay it now, and it got cheap. When [I wrote in June that code quality does not matter that much anymore](https://www.linkedin.com/posts/martin-st3pan3k_code-quality-just-does-not-matter-that-much-share-7475840393893367808-T41J/), half the thread read it as "we are abandoning quality". I was talking about the ROI of managing technical debt. The price of fixing, rewriting and deleting code dropped, so we do it all the time.
+"Fast code is technical debt you pay later." We pay it now, and it got cheap. When [I wrote in June that code quality does not matter that much anymore](https://x.com/st3pan3k/status/2112939707881390560), half the thread read it as "we are abandoning quality". I was talking about the ROI of managing technical debt. The price of fixing, rewriting and deleting code dropped, so we do it all the time.
 
 ![Minutes of technical debt per 1,000 lines of code, SonarQube, July to September 2026](https://martinstepanek.github.io/images/ai-writes-100-percent-of-our-code/07-tech-debt-1760.webp)
 
